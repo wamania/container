@@ -13,6 +13,16 @@ class OneService
 $container = new Container();
 $oneService = $container->get(OneService::class);
 ```
+Throw an NotFoundException if the service has not been built yet and if the class doesn't exists.
+
+# Has a service ?
+```php
+<?php
+
+$container = new Container();
+$oneService = $container->has(OneService::class);
+```
+Return true if the service has been built or if the class exists, otherwise return false
 
 # Autowiring
 if you have dependances between your services, the container will try to build them if it can.
@@ -44,10 +54,16 @@ $anotherService = $container->get(AnotherService::class);
 
 $oneService = $anotherService->getOneService();
 ```
+Be careful to circular reference : 
+ - if OneService need AnotherService
+ - AND if AnotherService need OneService
+ 
+ the container will throw a ContainerException.
+ 
+ If you try to inject an argument which is neither a class/service nor a parameter, and which cannot be null by default, it will throw a ContainerException.
 
 # Parameters
-You can pass parameters to your container and inject them in your services
-
+You can pass parameters to your container and inject them in your services.
 
 ```php
 <?php
