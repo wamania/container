@@ -1,4 +1,4 @@
-# container
+# Lazy load container
 Simple PHP container with lazy load and autowiring
 
 # Build a service
