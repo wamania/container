@@ -1,10 +1,17 @@
 # Lazy load container
 Simple PHP container with lazy load and autowiring
 
+# install
+```bash
+composer require wamania/container
+```
+
 # Get a service
 Each class of your project can be a service. 
 ```php
 <?php
+
+use Wamania\Container;
 
 class OneService
 {
@@ -19,6 +26,8 @@ Throw an NotFoundException if the service has not been built yet and if the clas
 ```php
 <?php
 
+use Wamania\Container;
+
 $container = new Container();
 $oneService = $container->has(OneService::class);
 ```
@@ -29,6 +38,8 @@ if you have dependances between your services, the container will try to build t
 
 ```php
 <?php
+
+use Wamania\Container;
 
 class OneService
 {
@@ -90,6 +101,8 @@ class Db
 
 ```php
 <?php
+
+use Wamania\Container;
 
 $parameters = [
     'host' => 'localhost',
