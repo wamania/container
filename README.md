@@ -4,6 +4,7 @@ Simple PHP container with lazy load and autowiring
 # Build a service
 Each class of your project can be a service. 
 ```php
+<?php
 
 class OneService
 {
@@ -17,6 +18,8 @@ $oneService = $container->get(OneService::class);
 if you have dependances between your services, the container will try to build them if it can.
 
 ```php
+<?php
+
 class OneService
 {
 }
@@ -41,3 +44,35 @@ $anotherService = $container->get(AnotherService::class);
 
 $oneService = $anotherService->getOneService();
 ```
+
+# Parameters
+You can inject some parameters in your services
+```php
+<?php
+
+$parameters = [
+    'host' => 'localhost',
+    'user' => 'user',
+    'password' => 'secret'
+];
+
+class Db
+{
+    private $host;
+    
+    private $user;
+    
+    private $password;
+
+    // we have defined Container::PARAMETER_PATTERN = '_parameter_%s'
+    // if container find the pattern, it inject the corresponding parameter value
+    public function __construct($_parameter_host, $_parameter_user, $_parameter_password)
+    {
+        $this->host = $_parameter_host;
+        $this->user = $_parameter_user;
+        $this->password = $_parameter_password;
+    }
+}
+
+$container = new Container($parameters);
+$db = $container->get(Db::class);
