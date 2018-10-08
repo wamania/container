@@ -37,14 +37,12 @@ Return true if the service has been built or if the class exists, otherwise retu
 if you have dependances between your services, the container will try to build them if it can.
 
 ```php
-<?php
-
-use Wamania\Container;
-
 class OneService
 {
 }
+```
 
+```php
 class AnotherService
 {
     private $oneService;
@@ -59,6 +57,12 @@ class AnotherService
         return $this->oneService;
     }
 }
+```
+
+```php
+<?php
+
+use Wamania\Container;
 
 $container = new Container();
 $anotherService = $container->get(AnotherService::class);
