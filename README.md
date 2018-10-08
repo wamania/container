@@ -1,7 +1,7 @@
 # Lazy load container
 Simple PHP container with lazy load and autowiring
 
-# Build a service
+# Get a service
 Each class of your project can be a service. 
 ```php
 <?php
