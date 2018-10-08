@@ -46,15 +46,11 @@ $oneService = $anotherService->getOneService();
 ```
 
 # Parameters
-You can inject some parameters in your services
+You can pass parameters to your container and inject them in your services
+
+
 ```php
 <?php
-
-$parameters = [
-    'host' => 'localhost',
-    'user' => 'user',
-    'password' => 'secret'
-];
 
 class Db
 {
@@ -65,7 +61,7 @@ class Db
     private $password;
 
     // we have defined Container::PARAMETER_PATTERN = '_parameter_%s'
-    // if container find the pattern, it inject the corresponding parameter value
+    // if the container find the pattern in an argument, it inject the corresponding parameter value
     public function __construct($_parameter_host, $_parameter_user, $_parameter_password)
     {
         $this->host = $_parameter_host;
@@ -74,5 +70,17 @@ class Db
     }
 }
 
+```
+
+```php
+<?php
+
+$parameters = [
+    'host' => 'localhost',
+    'user' => 'user',
+    'password' => 'secret'
+];
+
 $container = new Container($parameters);
 $db = $container->get(Db::class);
+```
